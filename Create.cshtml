@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Book Appointment";
+}
+<h2>Book Appointment</h2>
+
+<form asp-action="Create" method="post">
+    <label>Doctor</label>
+    <select name="doctorId" class="form-control">
+        @foreach (var doc in ViewBag.Doctors)
+        {
+            <option value="@doc.Id">@doc.ApplicationUser.FullName (@doc.Specialty.Name)</option>
+        }
+    </select>
+
+    <label>Date</label>
+    <input type="date" name="date" class="form-control" required />
+
+    <label>Start Time</label>
+    <input type="time" name="startTime" class="form-control" required />
+
+    <label>End Time</label>
+    <input type="time" name="endTime" class="form-control" required />
+
+    <button type="submit" class="btn btn-primary mt-2">Book</button>
+</form>
