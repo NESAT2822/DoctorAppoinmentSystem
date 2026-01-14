@@ -1,0 +1,29 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<Appointment>
+<h2>Pending Appointments</h2>
+<table class="table">
+    <tr>
+        <th>Patient</th>
+        <th>Doctor</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Action</th>
+    </tr>
+    @foreach (var appt in Model)
+    {
+        <tr>
+            <td>@appt.Patient.FullName</td>
+            <td>@appt.Doctor.ApplicationUser.FullName (@appt.Doctor.Specialty.Name)</td>
+            <td>@appt.Date.ToShortDateString()</td>
+            <td>@appt.StartTime - @appt.EndTime</td>
+            <td>
+                <a asp-action="Approve" asp-route-id="@appt.Id" class="btn btn-success">Approve</a>
+                <a asp-action="Reject" asp-route-id="@appt.Id" class="btn btn-danger">Reject</a>
+            </td>
+        </tr>
+    }
+</table>
